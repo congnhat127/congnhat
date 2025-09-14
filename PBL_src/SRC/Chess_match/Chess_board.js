@@ -36,3 +36,35 @@ for (let row = 0; row < 8; row++) {
     boardElement.appendChild(square);
   }
 }
+
+let draggedPiece = null;
+boardElement.addEventListener("dragstart", (e) => {
+  if (e.target.tagName === "IMG") {
+    draggedPiece = e.target;
+    setTimeout(() => {
+      e.target.style.display = "none";
+    }, 0);
+  }
+});
+boardElement.addEventListener("dragend", (e) => {
+  if (draggedPiece) {
+    draggedPiece.style.display = "block";
+    draggedPiece = null;
+  }
+});
+boardElement.addEventListener("dragover", (e) => {
+  e.preventDefault();
+});
+boardElement.addEventListener("drop", (e) => {
+  e.preventDefault();
+  if (e.target.classList.contains("square") && draggedPiece) {
+    if (e.target.children.length === 0 || e.target.children[0].tagName === "IMG") {
+      e.target.appendChild(draggedPiece);
+    }
+  }
+});
+const images = boardElement.querySelectorAll("img");
+images.forEach(img => {
+  img.setAttribute("draggable", true);
+});
+
