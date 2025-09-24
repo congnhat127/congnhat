@@ -34,9 +34,6 @@ resetBtn.addEventListener('click', () => {
   if (flipped) flipBoard();
 });
 
-// tạo bàn cờ
-createBoard(); // hàm này nằm trong Chess_board.js
-
 // chọn chế độ chơi
 document.querySelectorAll('.mode').forEach(node => node.addEventListener('click', () => {
   const m = node.dataset.mode;
